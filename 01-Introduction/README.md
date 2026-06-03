@@ -1,5 +1,13 @@
 # 📘 Introduction to DevOps & Azure DevOps
 
+![Azure DevOps](https://img.shields.io/badge/Azure%20DevOps-Learning-blue?logo=azure-devops)
+![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+![Level](https://img.shields.io/badge/Level-Beginner%20to%20Advanced-orange)
+![CI/CD](https://img.shields.io/badge/Focus-CI%2FCD-blueviolet)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
+
+---
+
 Welcome to the first step of your Azure DevOps journey 🚀
 
 Imagine you are building an application.
