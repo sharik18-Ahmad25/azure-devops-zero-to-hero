@@ -104,6 +104,10 @@ Even if you are a beginner, you will understand everything easily.
 
 **screenshot of creating organization**
 
+![Organization](../../assets/diagrams/oraganization.png)
+
+**srkdreams is a oraganization name**
+
 ---
 
 ### ❓ What is an Organization?
