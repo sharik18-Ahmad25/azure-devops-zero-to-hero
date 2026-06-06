@@ -146,6 +146,8 @@ Imagine a company called ABC Tech:
 
 **screenshot of making project**
 
+![project step](../../assets/diagrams/project-creating.png)
+
 ---
 
 ### ❓ Why Keep Project Private?
@@ -174,8 +176,6 @@ Imagine a company called ABC Tech:
 
 **👉 This is where your code will be stored.**
 
--screenshot of go to repo
-
 ---
 
 ## 🔹 Step 4: Initialize Repository
@@ -187,8 +187,6 @@ Imagine a company called ABC Tech:
 - Create your repository
 - Add a default README file
 - Make your first commit automatically
-
-**screenshot of create repo**
 
 ---
 
@@ -212,8 +210,6 @@ Then run:
 
 - 👉 This downloads the repository to your local system.
 
--screenshot
-
 ---
 
 ## 🔹 Step 6: Push Code
@@ -223,8 +219,6 @@ Then run:
 - git push
 
 **👉 This uploads your local code to Azure Repos.**
-
-- screenshot
 
 ---
 
