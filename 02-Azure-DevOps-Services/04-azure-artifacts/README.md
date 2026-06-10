@@ -67,6 +67,8 @@ Imagine you are building an application 👨‍💻
 
 **👉 Azure Artifacts is a package management service used to store and manage project dependencies in DevOps**.
 
+---
+
 ### 🎯 Why Use Azure Artifacts?
 
 **❌ Without Artifacts**
