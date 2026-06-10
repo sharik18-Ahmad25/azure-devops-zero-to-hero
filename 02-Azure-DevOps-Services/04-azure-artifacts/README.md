@@ -44,6 +44,8 @@ Imagine you are building an application 👨‍💻
 
 **👉 Not reliable**.
 
+---
+
 # 🔥 Solution → Azure Artifacts
 
 ---
