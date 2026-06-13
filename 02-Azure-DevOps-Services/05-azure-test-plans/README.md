@@ -207,7 +207,7 @@ Project: E-commerce App
 ---
 
 ## 🔗 DevOps Flow Connection 
-```Bash
+```bash
 Code → Azure Repos  
 Tasks → Azure Boards  
 Automation → Pipelines  
