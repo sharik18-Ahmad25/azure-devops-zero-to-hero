@@ -1,0 +1,18 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo "Step 1: Installing dependencies..."
+  displayName: 'Task 1: Install Dependencies'
+
+- script: echo "Step 2: Building the Application..."
+  displayName: 'Task 2: Build Code'
+
+- script: echo "Step 3: Running Unit Tests..."
+  displayName: 'Task 3: Test Code'
+
+- script: echo "Step 4: Publishing final build artifacts..."
+  displayName: 'Task 4: Save Output'
