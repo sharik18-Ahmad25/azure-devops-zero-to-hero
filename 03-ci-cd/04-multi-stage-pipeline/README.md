@@ -198,6 +198,8 @@ stages:
 
 📸 **Multi-Stage Pipeline Execution (Real Output)**
 
+![done](../../assets/diagrams/multistage-done.png)
+
 ---
 
 ## 🌍 Real-World Example
