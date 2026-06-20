@@ -11,7 +11,11 @@ steps:
 - script: echo "Building application..."
   displayName: Build
 
- script: node project-01-basic-ci-pipeline/sample-app/app.js
+- script: |
+    echo "Navigating to correct folder..."
+    cd 04-Projects/01-project-basic-CI-Pipeline
+    echo "Running our real application code..."
+    node sample-app/app.js
   displayName: Run App
 
 - script: echo "Running tests..."
