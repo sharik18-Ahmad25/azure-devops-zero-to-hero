@@ -242,11 +242,11 @@ Write Code → Push to GitHub → Pipeline Trigger → Run App → Output
 
 # 🎯 What You Learned
 
-✔ CI pipeline basics
-✔ GitHub integration
-✔ YAML pipeline
-✔ How to check logs
-✔ Real DevOps workflow
+* ✔ CI pipeline basics
+* ✔ GitHub integration
+* ✔ YAML pipeline
+* ✔ How to check logs
+* ✔ Real DevOps workflow
 
 ---
 
