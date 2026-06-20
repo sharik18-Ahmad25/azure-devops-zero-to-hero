@@ -11,7 +11,7 @@ steps:
 - script: echo "Building application..."
   displayName: Build
 
-- script: node sample-app/app.js
+ script: node project-01-basic-ci-pipeline/sample-app/app.js
   displayName: Run App
 
 - script: echo "Running tests..."
