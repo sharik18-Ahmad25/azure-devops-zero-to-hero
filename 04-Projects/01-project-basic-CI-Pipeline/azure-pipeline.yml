@@ -11,8 +11,14 @@ steps:
 - script: echo "Building application..."
   displayName: Build
 
- script: node project-01-basic-ci-pipeline/sample-app/app.js
-  displayName: Run App
+# Yahan dhyan se dekho: Hyphen (-) bhi laga hai aur cd karke sahi path par bhi gaye hain
+- script: |
+    echo "Navigating to the correct project folder..."
+    cd 04-Projects/01-project-basic-CI-Pipeline
+    
+    echo "Running our real application code..."
+    node sample-app/app.js
+  displayName: 'Run App'
 
 - script: echo "Running tests..."
   displayName: Test
