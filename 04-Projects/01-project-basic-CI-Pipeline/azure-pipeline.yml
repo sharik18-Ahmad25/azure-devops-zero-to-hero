@@ -1,0 +1,18 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: echo "Installing dependencies..."
+  displayName: Install
+
+- script: echo "Building application..."
+  displayName: Build
+
+- script: node sample-app/app.js
+  displayName: Run App
+
+- script: echo "Running tests..."
+  displayName: Test
