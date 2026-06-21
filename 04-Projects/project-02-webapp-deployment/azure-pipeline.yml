@@ -1,0 +1,32 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  # 1. Jo Service Connection abhi tumne banaya hai
+  azureServiceConnection: 'my-azure-conn'
+  
+  # 2. ⚠️ AGAR tumne portal par name badla tha, toh yahan apna sahi waala name likhna
+  webAppName: 'sharik-dream-app'
+
+steps:
+# Step 1: Hamari HTML website ke folder ko ek ZIP package mein band karna
+- task: ArchiveFiles@2
+  displayName: 'Package Website Files'
+  inputs:
+    rootFolderOrFile: '04-projects/project-02-webapp-deployment/app'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/website.zip'
+    replaceExistingArchive: true
+
+# Step 2: ZIP package ko direct Azure Web App par deploy karna
+- task: AzureWebApp@1
+  displayName: 'Deploy to Azure Web App'
+  inputs:
+    azureSubscription: '$(azureServiceConnection)'
+    appName: '$(webAppName)'
+    appType: 'webAppLinux' # Kyunki humne Linux portal choose kiya tha
+    package: '$(Build.ArtifactStagingDirectory)/website.zip'
