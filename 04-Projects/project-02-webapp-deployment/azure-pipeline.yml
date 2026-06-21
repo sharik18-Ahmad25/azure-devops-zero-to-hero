@@ -5,18 +5,19 @@ pool:
   vmImage: 'ubuntu-latest'
 
 variables:
-  # 1. Jo Service Connection abhi tumne banaya hai
+  # 1. Tumhara Service Connection Naam
   azureServiceConnection: 'my-svc-srk'
   
-  # 2. ⚠️ AGAR tumne portal par name badla tha, toh yahan apna sahi waala name likhna
+  # 2. Tumhara Web App Naam
   webAppName: 'sharik-dream-app'
 
 steps:
-# Step 1: Hamari HTML website ke folder ko ek ZIP package mein band karna
+# Step 1: Website files ko ZIP package mein band karna (P Capital Kiya)
 - task: ArchiveFiles@2
   displayName: 'Package Website Files'
   inputs:
-    rootFolderOrFile: '04-projects/project-02-webapp-deployment/app'
+    # 💡 Yahan humne '04-Projects' ka P capital kar diya hai
+    rootFolderOrFile: '$(Build.SourcesDirectory)/04-Projects/project-02-webapp-deployment/app'
     includeRootFolder: false
     archiveType: 'zip'
     archiveFile: '$(Build.ArtifactStagingDirectory)/website.zip'
@@ -28,5 +29,5 @@ steps:
   inputs:
     azureSubscription: '$(azureServiceConnection)'
     appName: '$(webAppName)'
-    appType: 'webAppLinux' # Kyunki humne Linux portal choose kiya tha
+    appType: 'webAppLinux' 
     package: '$(Build.ArtifactStagingDirectory)/website.zip'
