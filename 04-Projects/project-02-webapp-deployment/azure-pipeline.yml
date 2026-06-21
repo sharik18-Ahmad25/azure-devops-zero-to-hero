@@ -6,7 +6,7 @@ pool:
 
 variables:
   # 1. Jo Service Connection abhi tumne banaya hai
-  azureServiceConnection: 'my-azure-conn'
+  azureServiceConnection: 'my-svc-srk'
   
   # 2. ⚠️ AGAR tumne portal par name badla tha, toh yahan apna sahi waala name likhna
   webAppName: 'sharik-dream-app'
