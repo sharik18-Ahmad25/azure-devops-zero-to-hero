@@ -28,30 +28,25 @@ steps:
   inputs:
     terraformVersion: 'latest'
 
-# TASK 2: Initialize the working directory (Download Azure plugins)
-- task: TerraformTaskV4@4
-  displayName: 'Terraform Init'
+# TASK 2: Run native Terraform commands inside an authenticated Azure session
+- task: AzureCLI@2
+  displayName: 'Terraform Lifecycle (Init, Plan, Apply)'
   inputs:
-    provider: 'azurerm'
-    command: 'init'
-    workingDirectory: '$(Build.SourcesDirectory)/04-projects/project-03-terraform-azure-deployment/terraform' # Fixed: lowercase 'projects'
-    backendServiceArm: '$(azureServiceConnection)' # Fixed: Provided the required authentication key
-
-# TASK 3: Preview Changes (Dry Run)
-- task: TerraformTaskV4@4
-  displayName: 'Terraform Plan Preview'
-  inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    workingDirectory: '$(Build.SourcesDirectory)/04-projects/project-03-terraform-azure-deployment/terraform' # Fixed: lowercase 'projects'
-    environmentServiceNameAzureRM: '$(azureServiceConnection)' 
-
-# TASK 4: Final Execution (Deploy live infrastructure to Azure)
-- task: TerraformTaskV4@4
-  displayName: 'Terraform Apply Provision'
-  inputs:
-    provider: 'azurerm'
-    command: 'apply'
-    workingDirectory: '$(Build.SourcesDirectory)/04-projects/project-03-terraform-azure-deployment/terraform' # Fixed: lowercase 'projects'
-    environmentServiceNameAzureRM: '$(azureServiceConnection)' 
-    commandOptions: '-auto-approve'
+    azureSubscription: '$(azureServiceConnection)' # Uses your connection to log in automatically
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+      # 1. Navigate to the correct lowercase working directory
+      cd $(Build.SourcesDirectory)/04-projects/project-03-terraform-azure-deployment/terraform
+      
+      # 2. Initialize Terraform (Runs locally on the agent, no remote backend forced!)
+      echo "=== STEP 1: TERRAFORM INIT ==="
+      terraform init
+      
+      # 3. Generate the speculative preview plan
+      echo "=== STEP 2: TERRAFORM PLAN ==="
+      terraform plan
+      
+      # 4. Final deployment execution on Azure Cloud
+      echo "=== STEP 3: TERRAFORM APPLY ==="
+      terraform apply -auto-approve
