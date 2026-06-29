@@ -14,8 +14,8 @@ pool:
 # VARIABLES: Central control for configurations
 # ==========================================
 variables:
-  # The exact name of your secure Azure Service Connection.
-  azureServiceConnection: 'my-svc-srk' 
+  # The exact name of your newly created secure Azure Service Connection.
+  azureServiceConnection: 'my-fresh-azure-conn' 
 
 # ==========================================
 # STEPS: The sequential sequence of tasks
@@ -32,14 +32,14 @@ steps:
 - task: AzureCLI@2
   displayName: 'Terraform Lifecycle (Init, Plan, Apply)'
   inputs:
-    azureSubscription: '$(azureServiceConnection)' # Uses your connection to log in automatically
+    azureSubscription: '$(azureServiceConnection)' # Logs in automatically using your new connection
     scriptType: 'bash'
     scriptLocation: 'inlineScript'
     inlineScript: |
       # 1. Navigate to the correct lowercase working directory
       cd $(Build.SourcesDirectory)/04-projects/project-03-terraform-azure-deployment/terraform
       
-      # 2. Initialize Terraform (Runs locally on the agent, no remote backend forced!)
+      # 2. Initialize Terraform locally on the agent (bypasses rigid remote backend checks)
       echo "=== STEP 1: TERRAFORM INIT ==="
       terraform init
       
@@ -47,6 +47,6 @@ steps:
       echo "=== STEP 2: TERRAFORM PLAN ==="
       terraform plan
       
-      # 4. Final deployment execution on Azure Cloud
+      # 4. Final deployment execution to build resources on Azure Cloud
       echo "=== STEP 3: TERRAFORM APPLY ==="
-      terraform apply -auto-approve
+      terraform apply -auto-approve 
