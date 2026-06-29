@@ -34,7 +34,8 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(Build.SourcesDirectory)/04-Projects/project-03-terraform-azure-deployment/terraform'
+    workingDirectory: '$(Build.SourcesDirectory)/04-projects/project-03-terraform-azure-deployment/terraform' # Fixed: lowercase 'projects'
+    backendServiceArm: '$(azureServiceConnection)' # Fixed: Provided the required authentication key
 
 # TASK 3: Preview Changes (Dry Run)
 - task: TerraformTaskV4@4
@@ -42,8 +43,8 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    workingDirectory: '$(Build.SourcesDirectory)/04-Projects/project-03-terraform-azure-deployment/terraform'
-    environmentServiceNameAzureRM: '$(azureServiceConnection)' # Key to securely read cloud state
+    workingDirectory: '$(Build.SourcesDirectory)/04-projects/project-03-terraform-azure-deployment/terraform' # Fixed: lowercase 'projects'
+    environmentServiceNameAzureRM: '$(azureServiceConnection)' 
 
 # TASK 4: Final Execution (Deploy live infrastructure to Azure)
 - task: TerraformTaskV4@4
@@ -51,6 +52,6 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'apply'
-    workingDirectory: '$(Build.SourcesDirectory)/04-Projects/project-03-terraform-azure-deployment/terraform'
-    environmentServiceNameAzureRM: '$(azureServiceConnection)' # Key to make live changes
-    commandOptions: '-auto-approve' # Automatically skips human 'yes/no' typing approval
+    workingDirectory: '$(Build.SourcesDirectory)/04-projects/project-03-terraform-azure-deployment/terraform' # Fixed: lowercase 'projects'
+    environmentServiceNameAzureRM: '$(azureServiceConnection)' 
+    commandOptions: '-auto-approve'
