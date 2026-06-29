@@ -186,23 +186,23 @@ git push origin main
 
 **1.  Create a Service Connection:**
 
-`Go to Project Settings -> Service Connections -> New Service Connection -> Azure Resource Manager -> Service Principal (automatic).`
+* ✅  `Go to Project Settings -> Service Connections -> New Service Connection -> Azure Resource Manager -> Service Principal (automatic).`
 
-Set the scope level to `Subscription` and leave the Resource Group dropdown blank `(All resource groups)` so Terraform has permission to create new logical boundaries.
+* ✅ Set the scope level to `Subscription` and leave the Resource Group dropdown blank `(All resource groups)` so Terraform has permission to create new logical boundaries.
 
-Name it `my-fresh-azure-conn`, check the box to `Grant access permission to all pipelines, and save.`
+* ✅ Name it `my-fresh-azure-conn`, check the box to `Grant access permission to all pipelines, and save.`
 
 ---
 
 **2. Establish the Pipeline:**
 
-Navigate to the `Pipelines` tab on the left panel and click `New Pipeline.`
+* ✅ Navigate to the `Pipelines` tab on the left panel and click `New Pipeline.`
 
-Under "Where is your code?", choose `GitHub `and authorize your repo.
+* ✅ Under "Where is your code?", choose `GitHub `and authorize your repo.
 
-On the Configure screen, scroll down and select `Existing Azure Pipelines YAML file.`
+* ✅ On the Configure screen, scroll down and select `Existing Azure Pipelines YAML file.`
 
-Set the branch to main and map the path explicitly to:
+* ✅ Set the branch to main and map the path explicitly to:
 
 `/04-Projects/project-03-terraform-azure-deployment/azure-pipeline.yml`
 
