@@ -2,19 +2,19 @@
 # TRIGGER: Defines when the pipeline runs
 # ==========================================
 trigger:
-- main  # Triggers the pipeline automatically whenever new code is pushed to the 'main' branch.
+- main  # Triggers the pipeline automatically on a push to the 'main' branch.
 
 # ==========================================
 # POOL: Specifies the execution machine
 # ==========================================
 pool:
-  vmImage: 'ubuntu-latest' # Microsoft allocates a temporary, clean Ubuntu Linux virtual machine to run this job.
+  vmImage: 'ubuntu-latest' # Temporary clean Linux agent provided by Microsoft.
 
 # ==========================================
 # VARIABLES: Central control for configurations
 # ==========================================
 variables:
-  # The name of the secure Azure Service Connection created to authenticate safely without passwords.
+  # The exact name of your secure Azure Service Connection.
   azureServiceConnection: 'my-svc-srk' 
 
 # ==========================================
@@ -22,33 +22,35 @@ variables:
 # ==========================================
 steps:
 
-# TASK 1: Install the Terraform CLI software on the fresh runner agent
+# TASK 1: Install Terraform on the fresh runner agent
 - task: TerraformInstaller@1
-  displayName: 'Install Terraform CLI' # The user-friendly name displayed on the Azure DevOps dashboard
+  displayName: 'Install Terraform CLI'
   inputs:
-    terraformVersion: 'latest'      # Always fetches and installs the newest stable version of Terraform.
+    terraformVersion: 'latest'
 
-# TASK 2: Initialize the working directory (Download plugins)
-- task: TerraformCLI@0
+# TASK 2: Initialize the working directory (Download Azure plugins)
+- task: TerraformTaskV4@4
   displayName: 'Terraform Init'
   inputs:
-    command: 'init' # Reads providers.tf and downloads the official Microsoft Azure provider plugins.
-    # Tells the runner exactly inside which directory the terraform files are located:
+    provider: 'azurerm'
+    command: 'init'
     workingDirectory: '$(Build.SourcesDirectory)/04-Projects/project-03-terraform-azure-deployment/terraform'
 
-# TASK 3: Speculative Execution Plan (Dry Run / Preview)
-- task: TerraformCLI@0
+# TASK 3: Preview Changes (Dry Run)
+- task: TerraformTaskV4@4
   displayName: 'Terraform Plan Preview'
   inputs:
-    command: 'plan' # Displays a detailed preview of what will be created on the cloud without applying changes.
+    provider: 'azurerm'
+    command: 'plan'
     workingDirectory: '$(Build.SourcesDirectory)/04-Projects/project-03-terraform-azure-deployment/terraform'
-    environmentServiceName: '$(azureServiceConnection)' # The security passport used to read current cloud configurations.
+    environmentServiceNameAzureRM: '$(azureServiceConnection)' # Key to securely read cloud state
 
-# TASK 4: Final Execution (Provision live infrastructure to Azure Cloud)
-- task: TerraformCLI@0
+# TASK 4: Final Execution (Deploy live infrastructure to Azure)
+- task: TerraformTaskV4@4
   displayName: 'Terraform Apply Provision'
   inputs:
-    command: 'apply' # Physically creates the Resource Group and the unique Storage Account inside Azure.
+    provider: 'azurerm'
+    command: 'apply'
     workingDirectory: '$(Build.SourcesDirectory)/04-Projects/project-03-terraform-azure-deployment/terraform'
-    environmentServiceName: '$(azureServiceConnection)' # Authentication credential key to execute cloud changes.
-    commandOptions: '-auto-approve' # Instructs the agent to automatically say 'yes' without waiting for human approval typing.
+    environmentServiceNameAzureRM: '$(azureServiceConnection)' # Key to make live changes
+    commandOptions: '-auto-approve' # Automatically skips human 'yes/no' typing approval
