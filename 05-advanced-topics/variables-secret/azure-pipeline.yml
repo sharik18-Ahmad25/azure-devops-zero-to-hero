@@ -1,0 +1,29 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+# -------------------------------
+# Variables
+# -------------------------------
+variables:
+  applicationName: 'MyDemoApp'
+  environment: 'Development'
+  version: '1.0.0'
+
+steps:
+
+# Display variable values
+- script: |
+    echo "Application Name: $(applicationName)"
+    echo "Environment: $(environment)"
+    echo "Version: $(version)"
+  displayName: 'Display Variables'
+
+# Example of using a secret variable
+- script: |
+    echo "Connecting to the application..."
+    echo "Username: admin"
+    echo "Password: $(appPassword)"
+  displayName: 'Use Secret Variable'
